@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>球迷网 · 简明指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #ffedd5 0%, #fde9d8 40%, #fed7aa 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem;
+      line-height: 1.6;
+      color: #2d2b28;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    /* 顶部导航 – 轻量面包屑感 */
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 245, 235, 0.75);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 12px rgba(190, 120, 70, 0.08);
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #8b5a3a;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #6b4d37;
+      font-weight: 450;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: #b46f42;
+      border-bottom-color: #d99b6e;
+    }
+
+    /* 核心介绍 —— hero区 */
+    .hero-card {
+      background: #fffffffa;
+      backdrop-filter: blur(2px);
+      padding: 2.8rem 2.5rem;
+      border-radius: 48px;
+      box-shadow: 0 12px 32px rgba(180, 110, 55, 0.12);
+      margin-bottom: 2.2rem;
+      transition: box-shadow 0.25s;
+    }
+
+    .hero-card h1 {
+      font-size: 2.3rem;
+      font-weight: 620;
+      color: #482f1f;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-card p {
+      font-size: 1.1rem;
+      max-width: 780px;
+      color: #4d3e32;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card a {
+      color: #bb6f3e;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid #f3cfb2;
+      transition: background 0.15s, border-color 0.15s;
+      padding: 0.1rem 0.2rem;
+      border-radius: 8px;
+    }
+
+    .hero-card a:hover {
+      background: #fae6d6;
+      border-bottom-color: #b7794c;
+    }
+
+    /* 三个场景模块 – 卡片网格 */
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .scene-card {
+      background: #fffffffa;
+      border-radius: 36px;
+      padding: 1.8rem 1.5rem 2rem;
+      box-shadow: 0 8px 18px rgba(150, 95, 50, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .scene-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 28px rgba(140, 85, 40, 0.12);
+    }
+
+    .scene-card h3 {
+      font-size: 1.3rem;
+      font-weight: 580;
+      color: #5a3f2b;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .scene-card p {
+      color: #4b3f34;
+      font-size: 0.98rem;
+    }
+
+    /* 常见说明 + 提示区域 */
+    .faq-tips {
+      background: #fffffffa;
+      border-radius: 44px;
+      padding: 2rem 2.2rem 2.2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 6px 18px rgba(160, 100, 50, 0.08);
+    }
+
+    .faq-tips h2 {
+      font-size: 1.5rem;
+      font-weight: 580;
+      color: #402f20;
+      margin-bottom: 1.3rem;
+      border-left: 8px solid #e3b088;
+      padding-left: 1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .faq-q {
+      font-weight: 550;
+      color: #5a3e2b;
+    }
+
+    .faq-a {
+      color: #4d3e32;
+      padding-left: 0.2rem;
+    }
+
+    .faq-a a {
+      color: #b46a39;
+      font-weight: 480;
+      text-decoration: none;
+      border-bottom: 1.5px solid #eacab0;
+      transition: border-color 0.15s;
+    }
+
+    .faq-a a:hover {
+      border-bottom-color: #9a663f;
+    }
+
+    .extra-note {
+      margin-top: 1.6rem;
+      background: #fbf1e7;
+      padding: 1.2rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.96rem;
+      color: #3f342b;
+    }
+
+    .extra-note strong {
+      color: #7a543a;
+    }
+
+    /* 底部小印记 */
+    .footer-note {
+      text-align: center;
+      padding: 1.2rem 0.5rem 0.2rem;
+      color: #6b5543;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* 响应式细节 */
+    @media (max-width: 640px) {
+      body {
+        padding: 0.8rem;
+      }
+
+      .top-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 1.2rem;
+      }
+
+      .nav-links {
+        gap: 1.2rem;
+        justify-content: center;
+      }
+
+      .hero-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .hero-card h1 {
+        font-size: 1.8rem;
+      }
+
+      .faq-tips {
+        padding: 1.6rem 1.2rem;
+      }
+
+      .scene-card {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero-card h1 {
+        font-size: 1.5rem;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <!-- 顶部导航 -->
+  <nav class="top-nav">
+    <span class="nav-brand">⚽ 简明指南</span>
+    <div class="nav-links">
+      <a href="#">使用说明</a>
+      <a href="#">场景参考</a>
+      <a href="#">常见问题</a>
+    </div>
+  </nav>
+
+  <!-- 核心介绍 hero -->
+  <section class="hero-card">
+    <h1>关于球迷网 · 基础认识</h1>
+    <p>
+      <a href="https://index-qiumi.com">球迷网</a> 是一个以足球资讯与赛事信息聚合为特色的内容站点。
+      站内汇集了多维度比赛数据、球队动态以及球迷讨论，适合日常快速浏览或深度跟踪联赛。
+      初次访问时，建议先了解其版块分布与信息组织方式，能帮你更快找到关心的话题。
+    </p>
+    <p>
+      从导航栏到内容卡片，整个网站围绕「信息获取效率」做了不少细节处理。
+      下面整理了三个最常见的浏览场景，以及一些实用提醒，方便你快速上手。
+    </p>
+  </section>
+
+  <!-- 三个场景模块 -->
+  <div class="scene-grid">
+    <div class="scene-card">
+      <h3>📋 日常快览</h3>
+      <p>早晨或通勤时，打开首页便可看到滚动赛果、近期焦点和简短战报。<br>不登录、不注册，直接使用浏览器访问即可。适合想用最少时间了解昨夜战况的你。</p>
+    </div>
+    <div class="scene-card">
+      <h3>🔎 深度追踪</h3>
+      <p>如果你有持续关注的联赛或球队，可以利用站内分类筛选与统计页面。<br>赛程、积分、射手榜等数据模块彼此独立又互相链接，方便交叉查阅。</p>
+    </div>
+    <div class="scene-card">
+      <h3>💬 观点参考</h3>
+      <p>部分栏目包含球迷投稿或编辑推荐内容，风格偏主观。<br>阅读时请结合多方信息自行判断，尤其涉及转会、伤病和战术分析时保持审慎。</p>
+    </div>
+  </div>
+
+  <!-- 常见说明 + 访问提醒 -->
+  <div class="faq-tips">
+    <h2>常见说明 · 访问提醒</h2>
+
+    <div class="faq-item">
+      <span class="faq-q">📌 是否需要注册或付费？</span>
+      <span class="faq-a">
+        目前网站所有公开内容均可直接浏览，无需注册或订阅。部分互动功能（如评论）可能需要登录，但基本信息获取不受影响。
+      </span>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">📌 信息更新频率如何？</span>
+      <span class="faq-a">
+        比赛期间通常实时或赛后短时间内更新比分与简讯。深度文章则按赛事周期发布，建议以首页时间戳为准。
+      </span>
+    </div>
+
+    <div class="faq-item">
+      <span class="faq-q">📌 移动端浏览体验</span>
+      <span class="faq-a">
+        页面针对手机做了响应式适配，但部分数据表格在窄屏下需左右滑动。推荐横屏或平板模式下查阅复杂统计。<br>
+        另外，通过 <a href="https://index-qiumi.com">球迷网</a> 直接访问即可，不需要额外下载应用。
+      </span>
+    </div>
+
+    <!-- 额外提醒块 -->
+    <div class="extra-note">
+      <strong>📢 一点提醒：</strong> 网站内容由编辑与用户共同贡献，涉及赛果、阵容、排名等信息请以官方发布为准。
+      链接外部来源时会标注出处，但不对第三方信息的准确性承担责任。保持理性讨论，留意转载内容的时效性。
+    </div>
+  </div>
+
+  <div class="footer-note">
+    — 信息卡片·仅供参考 —
+  </div>
+</div>
+</body>
+</html>
